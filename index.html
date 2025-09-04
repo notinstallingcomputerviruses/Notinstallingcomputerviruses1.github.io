@@ -30,16 +30,23 @@
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0,0,0,0.5);
     transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
   }
 
   .pc-card:hover {
     transform: scale(1.05);
   }
 
-  .pc-card img {
-    width: 100%;
+  .pc-image {
     height: 180px;
-    object-fit: cover;
+    background-color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1rem;
+    color: #fff;
   }
 
   .pc-card-content {
@@ -66,7 +73,7 @@
 
   <!-- All-White Gaming PC -->
   <div class="pc-card">
-    <img src="https://via.placeholder.com/400x180.png?text=All-White+Gaming+PC" alt="All-White Gaming PC">
+    <div class="pc-image">All-White Gaming PC</div>
     <div class="pc-card-content">
       <h2>All-White Gaming PC</h2>
       <p>Sleek white case with tempered glass panels, RGB accents, and high-performance gaming components.</p>
@@ -75,7 +82,7 @@
 
   <!-- Ultra High-End Workstation -->
   <div class="pc-card">
-    <img src="https://via.placeholder.com/400x180.png?text=Ultra+High-End+Workstation" alt="Ultra High-End Workstation">
+    <div class="pc-image">Ultra High-End Workstation</div>
     <div class="pc-card-content">
       <h2>Ultra High-End Workstation</h2>
       <p>Top-of-the-line CPU and GPU, massive RAM, and storage designed for professional workloads and rendering.</p>
@@ -84,7 +91,7 @@
 
   <!-- Compact Budget Gaming PC -->
   <div class="pc-card">
-    <img src="https://via.placeholder.com/400x180.png?text=Compact+Budget+Gaming+PC" alt="Compact Budget Gaming PC">
+    <div class="pc-image">Compact Budget Gaming PC</div>
     <div class="pc-card-content">
       <h2>Compact Budget Gaming PC</h2>
       <p>Small form factor with mid-range components. Perfect for entry-level gamers or limited desk space.</p>
@@ -93,7 +100,7 @@
 
   <!-- Liquid-Cooled Extreme PC -->
   <div class="pc-card">
-    <img src="https://via.placeholder.com/400x180.png?text=Liquid-Cooled+Extreme+PC" alt="Liquid-Cooled Extreme PC">
+    <div class="pc-image">Liquid-Cooled Extreme PC</div>
     <div class="pc-card-content">
       <h2>Liquid-Cooled Extreme PC</h2>
       <p>Advanced liquid cooling, overclocked CPU & GPU, and high-speed memory for extreme performance.</p>
@@ -102,7 +109,7 @@
 
   <!-- RGB Showcase PC -->
   <div class="pc-card">
-    <img src="https://via.placeholder.com/400x180.png?text=RGB+Showcase+PC" alt="RGB Showcase PC">
+    <div class="pc-image">RGB Showcase PC</div>
     <div class="pc-card-content">
       <h2>RGB Showcase PC</h2>
       <p>Eye-catching RGB lighting setup with custom water loops, perfect for gamers who want a visually stunning build.</p>
@@ -111,7 +118,7 @@
 
   <!-- Silent Build Workstation -->
   <div class="pc-card">
-    <img src="https://via.placeholder.com/400x180.png?text=Silent+Build+Workstation" alt="Silent Build Workstation">
+    <div class="pc-image">Silent Build Workstation</div>
     <div class="pc-card-content">
       <h2>Silent Build Workstation</h2>
       <p>Optimized for quiet operation with fanless or ultra-quiet fans, suitable for audio/video production or home office setups.</p>
