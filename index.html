@@ -2,52 +2,67 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PC Gallery</title>
-  <!-- Google Font -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PC Builds Gallery</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>💻 PC Gallery</h1>
-    <p>Explore awesome computer setups</p>
+  <nav class="top-nav">
+    <div class="logo">PC Gallery</div>
+    <ul>
+      <li><a href="#">Shop</a></li>
+      <li><a href="#">Build Help</a></li>
+      <li><a href="#">Drops</a></li>
+      <li><a href="#">Support</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <h1>Explore Our Pre-Built PCs</h1>
+    <p>Performance × Aesthetics × Value</p>
   </header>
 
-  <main class="gallery">
-    <div class="card">
+  <main class="grid">
+    <!-- Example build card -->
+    <div class="build-card">
       <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8" alt="Gaming PC">
-      <h2>Gaming Rig</h2>
-      <p>RGB lights, water cooling, and insane performance.</p>
+      <h2>Gaming Rig v2</h2>
+      <p class="price">$899.00</p>
+      <button class="btn out-of-stock">Out of Stock</button>
     </div>
 
-    <div class="card">
+    <div class="build-card">
       <img src="https://images.unsplash.com/photo-1587202372775-bc86dba7f9a3" alt="Office Desktop">
       <h2>Office Setup</h2>
-      <p>Clean, modern, and ready for work.</p>
+      <p class="price">$1,199.00</p>
+      <button class="btn add-cart">Add to Cart</button>
     </div>
-
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1518770660439-4636190af475" alt="Laptop workstation">
-      <h2>Laptop Station</h2>
-      <p>Portable power for students and creators.</p>
-    </div>
-
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2" alt="Custom Build">
-      <h2>Custom Build</h2>
-      <p>Showcasing hardware with a clear side panel.</p>
-    </div>
-
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1593642532973-d31b6557fa68" alt="Programming laptop">
-      <h2>Coding Laptop</h2>
-      <p>Reliable and optimized for developers.</p>
-    </div>
+    <!-- Add more cards as needed -->
   </main>
 
+  <section class="highlights">
+    <div>
+      <h3>1 Year Warranty</h3>
+      <p>Buy confidently with full coverage.</p>
+    </div>
+    <div>
+      <h3>Secure Shipping</h3>
+      <p>Double boxed and foam-protected.</p>
+    </div>
+    <div>
+      <h3>Free Extras</h3>
+      <p>Includes USB tool and mousepad bundle.</p>
+    </div>
+  </section>
+
   <footer>
-    <p>🚀 Made by Jacoby | Powered by GitHub Pages</p>
+    <p>Follow us:</p>
+    <div class="social">
+      <a href="#">YouTube</a> • <a href="#">Instagram</a> • <a href="#">X</a>
+    </div>
+    <p>© 2025 by Your PC Gallery</p>
   </footer>
 </body>
 </html>
