@@ -1,106 +1,313 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>PC Builds Showcase</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #111;
-      color: #fff;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      text-align: center;
-      padding: 2rem;
-      background: #222;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-      padding: 2rem;
-    }
-    .card {
-      background: #1a1a1a;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
-      transition: transform 0.2s ease;
-      text-decoration: none;
-      color: inherit;
-    }
-    .card:hover {
-      transform: translateY(-5px);
-    }
-    .card img {
-      width: 100%;
-      display: block;
-    }
-    .card h3 {
-      margin: 1rem;
-    }
-    .card p {
-      margin: 0 1rem 1.5rem;
-      color: #ccc;
-    }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>PC Builds Showcase</title>
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+<style>
+  :root{
+    --bg:#0b0b0b; --card:#101216; --muted:#9aa0a6; --accent:#60a5fa;
+    --glass: rgba(255,255,255,0.03);
+    --radius:14px;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%; margin:0; background:linear-gradient(180deg,#07070a 0%, #0b0b0b 100%); color:#e6eef8}
+  header{
+    padding:48px 24px;
+    display:flex;
+    align-items:center;
+    gap:20px;
+    border-bottom:1px solid rgba(255,255,255,0.03);
+    backdrop-filter: blur(6px);
+  }
+  .brand {
+    display:flex; gap:12px; align-items:center;
+  }
+  .logo {
+    width:56px; height:56px; border-radius:12px; background:linear-gradient(135deg,#1f2937,#111827);
+    display:flex; align-items:center; justify-content:center; font-weight:700; color:var(--accent);
+    box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+  }
+  h1{font-size:20px; margin:0}
+  p.lead{margin:0; color:var(--muted); font-size:14px}
+
+  main{max-width:1200px; margin:32px auto; padding:0 20px}
+  .controls {display:flex; justify-content:space-between; gap:12px; align-items:center; margin-bottom:18px}
+  .search {flex:1; max-width:540px; background:var(--card); border-radius:12px; padding:10px 12px; display:flex; align-items:center; gap:8px}
+  .search input{background:transparent;border:0; outline:0; color:inherit; width:100%; font-size:14px}
+  .filters {display:flex; gap:8px}
+  .btn {background:var(--glass); border:1px solid rgba(255,255,255,0.03); padding:8px 12px; border-radius:10px; color:var(--muted); cursor:pointer; font-size:13px}
+  .btn.primary {background:linear-gradient(90deg,var(--accent),#3b82f6); color:#031032; border:0}
+
+  .grid {
+    display:grid;
+    grid-template-columns: repeat(auto-fill,minmax(260px,1fr));
+    gap:18px;
+  }
+  .card {
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border:1px solid rgba(255,255,255,0.03);
+    border-radius:var(--radius);
+    overflow:hidden;
+    transition: transform .18s ease, box-shadow .18s ease;
+    cursor:pointer;
+    display:flex;
+    flex-direction:column;
+    height:100%;
+  }
+  .card:hover{ transform: translateY(-6px); box-shadow:0 20px 50px rgba(2,6,23,0.6) }
+  .card .img {
+    height:170px; width:100%; object-fit:cover; display:block;
+    background:#0f1724;
+  }
+  .card .body {
+    padding:14px;
+    display:flex; gap:12px; flex-direction:column; flex:1;
+  }
+  .title {font-size:16px; margin:0}
+  .desc {font-size:13px; color:var(--muted); margin:4px 0 8px}
+  .specs {display:flex; gap:8px; flex-wrap:wrap; margin-top:auto}
+  .chip {font-size:12px; padding:6px 8px; background:rgba(255,255,255,0.02); border-radius:999px; color:var(--muted); border:1px solid rgba(255,255,255,0.02)}
+
+  footer {text-align:center; padding:28px 12px; color:var(--muted); font-size:13px; margin-top:40px}
+
+  /* modal */
+  .modal-backdrop {position:fixed; inset:0; background:rgba(2,6,23,0.6); display:none; align-items:center; justify-content:center; z-index:80; padding:20px}
+  .modal {width:100%; max-width:980px; background:linear-gradient(180deg,#0c0f14,#06070a); border-radius:16px; border:1px solid rgba(255,255,255,0.04); overflow:auto; max-height:90vh}
+  .modal .header {display:flex; gap:12px; align-items:center; padding:18px 20px; border-bottom:1px solid rgba(255,255,255,0.03)}
+  .modal .header h2 {margin:0; font-size:18px}
+  .modal .container {display:grid; grid-template-columns: 1fr 340px; gap:18px; padding:18px}
+  .bigimg {width:100%; height:360px; object-fit:cover; border-radius:10px; background:#091018}
+  .side {background:rgba(255,255,255,0.02); padding:12px; border-radius:10px}
+  .spec-list{list-style:none; padding:0; margin:0; display:grid; gap:8px}
+  .spec-list li{background:rgba(255,255,255,0.02); padding:10px; border-radius:10px; font-size:14px}
+  .close-btn {margin-left:auto; background:transparent; border:0; color:var(--muted); cursor:pointer; font-size:18px}
+  @media (max-width:880px){
+    .modal .container{grid-template-columns:1fr; padding:12px}
+    .bigimg{height:220px}
+  }
+</style>
 </head>
 <body>
-  <header>
-    <h1>🔥 Cool PC Builds 🔥</h1>
-    <p>Explore budget, mid-range, and ultra high-end setups</p>
-  </header>
 
-  <div class="grid">
-    <a href="pc1.html" class="card">
-      <img src="https://images.unsplash.com/photo-1606813902494-5e6bcb4803b6?auto=format&fit=crop&w=800&q=80" alt="White Gaming PC">
-      <h3>All White Gaming PC</h3>
-      <p>Sleek white build with RGB accents and powerful cooling.</p>
-    </a>
-
-    <a href="pc2.html" class="card">
-      <img src="https://images.unsplash.com/photo-1612197524248-df3ee06e2d79?auto=format&fit=crop&w=800&q=80" alt="Workstation PC">
-      <h3>Workstation PC</h3>
-      <p>Perfect for editing, rendering, and multitasking heavy workloads.</p>
-    </a>
-
-    <a href="pc3.html" class="card">
-      <img src="https://images.unsplash.com/photo-1593642532973-d31b6557fa68?auto=format&fit=crop&w=800&q=80" alt="Ultra High-End PC">
-      <h3>Ultra High-End Beast</h3>
-      <p>Top-of-the-line parts designed for max FPS and performance.</p>
-    </a>
-
-    <a href="pc4.html" class="card">
-      <img src="https://images.unsplash.com/photo-1601979039534-119f854ec8be?auto=format&fit=crop&w=800&q=80" alt="Budget Gaming PC">
-      <h3>Budget Gaming PC</h3>
-      <p>A solid entry-level build that won’t break the bank.</p>
-    </a>
-
-    <a href="pc5.html" class="card">
-      <img src="https://images.unsplash.com/photo-1598550476439-6225f92f71a1?auto=format&fit=crop&w=800&q=80" alt="RGB Showcase PC">
-      <h3>RGB Showcase</h3>
-      <p>Built to shine with dazzling RGB lighting everywhere.</p>
-    </a>
-
-    <a href="pc6.html" class="card">
-      <img src="https://images.unsplash.com/photo-1612197576160-7c6e6404c39f?auto=format&fit=crop&w=800&q=80" alt="Streaming PC">
-      <h3>Streaming PC</h3>
-      <p>Optimized for smooth streaming and gaming at the same time.</p>
-    </a>
-
-    <a href="pc7.html" class="card">
-      <img src="https://images.unsplash.com/photo-1625842203071-9f3f94a515a6?auto=format&fit=crop&w=800&q=80" alt="Mini ITX PC">
-      <h3>Mini-ITX Compact</h3>
-      <p>Small but mighty — perfect for tight spaces without compromise.</p>
-    </a>
-
-    <a href="pc8.html" class="card">
-      <img src="https://images.unsplash.com/photo-1606813898861-b58f7d3d6d15?auto=format&fit=crop&w=800&q=80" alt="Silent PC">
-      <h3>Silent Build</h3>
-      <p>Whisper-quiet PC with focus on cooling and noise reduction.</p>
-    </a>
+<header>
+  <div class="brand">
+    <div class="logo">PC</div>
+    <div>
+      <h1>PC Builder Showcase</h1>
+      <p class="lead">Handpicked custom builds — inspiration, specs, and photos</p>
+    </div>
   </div>
+</header>
+
+<main>
+  <div class="controls">
+    <div class="search">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="opacity:.7"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <input id="q" placeholder="Search builds, GPU, CPU..." />
+    </div>
+    <div class="filters">
+      <button class="btn" id="filter-all">All</button>
+      <button class="btn" id="filter-gaming">Gaming</button>
+      <button class="btn" id="filter-creator">Creator</button>
+      <button class="btn primary" id="add-sample">Add sample build</button>
+    </div>
+  </div>
+
+  <section class="grid" id="grid">
+    <!-- cards injected here -->
+  </section>
+
+  <footer>© 2025 PC Builds Showcase — Built for learning & inspiration</footer>
+</main>
+
+<!-- modal -->
+<div class="modal-backdrop" id="backdrop" role="dialog" aria-hidden="true">
+  <div class="modal" role="document" aria-modal="true">
+    <div class="header">
+      <h2 id="modal-title">Build Title</h2>
+      <button class="close-btn" id="close-modal" title="Close">✕</button>
+    </div>
+    <div class="container">
+      <div>
+        <img id="modal-img" class="bigimg" src="" alt="Build image">
+        <div style="padding:12px 0;">
+          <p id="modal-desc" style="color:var(--muted); margin:0 0 12px;"></p>
+          <h3 style="margin:0 0 8px 0">Highlights</h3>
+          <div id="modal-highlights" style="display:flex; gap:8px; flex-wrap:wrap"></div>
+        </div>
+      </div>
+      <aside class="side">
+        <h4 style="margin:0 0 10px 0">Specs</h4>
+        <ul id="spec-list" class="spec-list"></ul>
+        <div style="margin-top:12px; display:flex; gap:8px">
+          <a id="open-link" class="btn" style="text-decoration:none">Open detail page</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<script>
+/* --- Example builds data (edit or replace) --- */
+const builds = [
+  {
+    id: "rgb-beast",
+    title: "RGB Gaming Beast",
+    type: "Gaming",
+    short: "RTX 4090 + Ryzen 9, custom loop, dazzling RGB.",
+    img: "https://images.unsplash.com/photo-1612832021046-3f6a3d0cd5d8?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=8c6d6c8b60d2e6139e5e5b5f1b0f4f3f",
+    highlights: ["Custom loop", "64GB DDR5", "2TB NVMe"],
+    specs: {
+      "GPU":"NVIDIA RTX 4090",
+      "CPU":"AMD Ryzen 9 7950X",
+      "RAM":"64GB DDR5",
+      "Storage":"2TB NVMe SSD",
+      "Case":"Lian Li O11 Dynamic",
+      "PSU":"1000W Gold"
+    }
+  },
+  {
+    id: "white-minimal",
+    title: "Minimalist White Build",
+    type: "Creator",
+    short: "Quiet, clean white finish, great thermals.",
+    img: "https://images.unsplash.com/photo-1621593471867-3b1d7d3b1ad9?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=3f2cc9f5f9c4a7a17f7c8b2b2b4e6a2b",
+    highlights: ["Silent fans", "White theme", "Tempered glass"],
+    specs: {
+      "GPU":"NVIDIA RTX 3080",
+      "CPU":"Intel i7-12700K",
+      "RAM":"32GB DDR4",
+      "Storage":"1TB NVMe + 2TB HDD",
+      "Case":"NZXT H510 Elite",
+      "PSU":"750W Gold"
+    }
+  },
+  {
+    id: "sff-power",
+    title: "Compact Powerhouse",
+    type: "Gaming",
+    short: "Small form factor with surprisingly big performance.",
+    img: "https://images.unsplash.com/photo-1615874959478-1a4d1b1f1e2a?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=5d6f7a8b9c9d9e0f1a2b3c4d5e6f7a8b",
+    highlights: ["SFF", "Liquid cooling", "High single-core perf"],
+    specs: {
+      "GPU":"NVIDIA RTX 3080",
+      "CPU":"Intel i9-12900KS",
+      "RAM":"32GB DDR4",
+      "Storage":"1TB NVMe",
+      "Case":"NCASE M1",
+      "PSU":"750W SFX"
+    }
+  }
+];
+
+/* --- Utilities & rendering --- */
+const grid = document.getElementById('grid');
+const q = document.getElementById('q');
+const backdrop = document.getElementById('backdrop');
+const modalTitle = document.getElementById('modal-title');
+const modalImg = document.getElementById('modal-img');
+const modalDesc = document.getElementById('modal-desc');
+const specList = document.getElementById('spec-list');
+const modalHighlights = document.getElementById('modal-highlights');
+const openLink = document.getElementById('open-link');
+
+function makeCard(build){
+  const a = document.createElement('article');
+  a.className = 'card';
+  a.dataset.id = build.id;
+  a.innerHTML = `
+    <img class="img" src="${build.img}" alt="${escapeHtml(build.title)}">
+    <div class="body">
+      <div>
+        <h3 class="title">${escapeHtml(build.title)}</h3>
+        <p class="desc">${escapeHtml(build.short)}</p>
+      </div>
+      <div class="specs">
+        <div class="chip">${escapeHtml(build.type)}</div>
+        <div class="chip">${Object.values(build.specs)[0] || ''}</div>
+      </div>
+    </div>
+  `;
+  a.addEventListener('click', ()=>openBuild(build.id));
+  return a;
+}
+
+function renderGrid(list){
+  grid.innerHTML = '';
+  list.forEach(b => grid.appendChild(makeCard(b)));
+}
+
+function openBuild(id){
+  const build = builds.find(b=>b.id===id);
+  if(!build) return;
+  modalTitle.textContent = build.title;
+  modalImg.src = build.img;
+  modalImg.alt = build.title;
+  modalDesc.textContent = build.short;
+  specList.innerHTML = '';
+  modalHighlights.innerHTML = '';
+  Object.entries(build.specs).forEach(([k,v])=>{
+    const li = document.createElement('li');
+    li.textContent = `${k}: ${v}`;
+    specList.appendChild(li);
+  });
+  (build.highlights||[]).forEach(h=>{
+    const d = document.createElement('div');
+    d.className = 'chip';
+    d.style.background = 'transparent';
+    d.style.color = 'var(--muted)';
+    d.style.border = '1px solid rgba(255,255,255,0.03)';
+    d.textContent = h;
+    modalHighlights.appendChild(d);
+  });
+  openLink.href = '#';
+  openLink.onclick = (e)=>{ e.preventDefault(); alert('You can create separate detail pages if you prefer.'); }
+  backdrop.style.display = 'flex';
+  backdrop.setAttribute('aria-hidden','false');
+}
+
+document.getElementById('close-modal').addEventListener('click', closeModal);
+backdrop.addEventListener('click', (e)=>{ if(e.target===backdrop) closeModal(); });
+function closeModal(){
+  backdrop.style.display = 'none';
+  backdrop.setAttribute('aria-hidden','true');
+}
+
+/* search & filters */
+q.addEventListener('input', ()=> {
+  const val = q.value.trim().toLowerCase();
+  if(!val) return renderGrid(builds);
+  const out = builds.filter(b=>{
+    return (b.title + ' ' + b.short + ' ' + Object.values(b.specs).join(' ')).toLowerCase().includes(val);
+  });
+  renderGrid(out);
+});
+
+document.getElementById('filter-all').addEventListener('click', ()=>renderGrid(builds));
+document.getElementById('filter-gaming').addEventListener('click', ()=>renderGrid(builds.filter(b=>b.type==='Gaming')));
+document.getElementById('filter-creator').addEventListener('click', ()=>renderGrid(builds.filter(b=>b.type==='Creator')));
+
+document.getElementById('add-sample').addEventListener('click', ()=>{
+  const id = 'sample-'+Math.random().toString(36).slice(2,8);
+  const sample = {
+    id, title: 'New Sample Build', type: 'Gaming',
+    short: 'A fresh sample build. Edit details in the JS builds array.',
+    img: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1600&auto=format&fit=crop',
+    highlights:['Sample'], specs:{"GPU":"TBD","CPU":"TBD","RAM":"TBD","Storage":"TBD"}
+  };
+  builds.unshift(sample);
+  renderGrid(builds);
+  openBuild(id);
+});
+
+/* small helper */
+function escapeHtml(s){ return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;'); }
+
+renderGrid(builds);
+</script>
+
 </body>
 </html>
