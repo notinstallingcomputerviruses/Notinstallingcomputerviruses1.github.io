@@ -22,12 +22,12 @@
     border-bottom:1px solid rgba(255,255,255,0.03);
     backdrop-filter: blur(6px);
   }
-  .brand {display:flex; gap:12px; align-items:center;}
+  .brand {
+    display:flex; gap:12px; align-items:center;
+  }
   .logo {
-    width:56px; height:56px; border-radius:12px;
-    background:linear-gradient(135deg,#1f2937,#111827);
-    display:flex; align-items:center; justify-content:center;
-    font-weight:700; color:var(--accent);
+    width:56px; height:56px; border-radius:12px; background:linear-gradient(135deg,#1f2937,#111827);
+    display:flex; align-items:center; justify-content:center; font-weight:700; color:var(--accent);
     box-shadow: 0 6px 18px rgba(2,6,23,0.6);
   }
   h1{font-size:20px; margin:0}
@@ -58,8 +58,14 @@
     height:100%;
   }
   .card:hover{ transform: translateY(-6px); box-shadow:0 20px 50px rgba(2,6,23,0.6) }
-  .card .img {height:170px; width:100%; object-fit:cover; display:block; background:#0f1724;}
-  .card .body {padding:14px; display:flex; gap:12px; flex-direction:column; flex:1;}
+  .card .img {
+    height:170px; width:100%; object-fit:cover; display:block;
+    background:#0f1724;
+  }
+  .card .body {
+    padding:14px;
+    display:flex; gap:12px; flex-direction:column; flex:1;
+  }
   .title {font-size:16px; margin:0}
   .desc {font-size:13px; color:var(--muted); margin:4px 0 8px}
   .specs {display:flex; gap:8px; flex-wrap:wrap; margin-top:auto}
@@ -140,78 +146,14 @@
 
 <script>
 const builds = [
-  {
-    id: "rgb-beast",
-    title: "RGB Gaming Beast",
-    type: "Gaming",
-    short: "RTX 4090 + Ryzen 9, custom loop, dazzling RGB.",
-    img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1600&auto=format&fit=crop",
-    highlights: ["Custom loop", "64GB DDR5", "2TB NVMe"],
-    specs: {"GPU":"NVIDIA RTX 4090","CPU":"AMD Ryzen 9 7950X","RAM":"64GB DDR5","Storage":"2TB NVMe SSD","Case":"Lian Li O11 Dynamic","PSU":"1000W Gold"}
-  },
-  {
-    id: "white-minimal",
-    title: "Minimalist White Build",
-    type: "Creator",
-    short: "Quiet, clean white finish, great thermals.",
-    img: "https://images.unsplash.com/photo-1606813902494-5e6bcb4803b6?q=80&w=1600&auto=format&fit=crop",
-    highlights: ["Silent fans", "White theme", "Tempered glass"],
-    specs: {"GPU":"NVIDIA RTX 3080","CPU":"Intel i7-12700K","RAM":"32GB DDR4","Storage":"1TB NVMe + 2TB HDD","Case":"NZXT H510 Elite","PSU":"750W Gold"}
-  },
-  {
-    id: "budget-baller",
-    title: "Budget Baller",
-    type: "Gaming",
-    short: "Affordable build with great 1080p performance.",
-    img: "https://images.unsplash.com/photo-1612197524248-df3ee06e2d79?q=80&w=1600&auto=format&fit=crop",
-    highlights: ["Bang for buck", "Efficient cooling", "Compact case"],
-    specs: {"GPU":"NVIDIA RTX 3050","CPU":"AMD Ryzen 5 5500","RAM":"16GB DDR4","Storage":"500GB NVMe SSD","Case":"NZXT H6 Flow","PSU":"Corsair CX650"}
-  },
-  {
-    id: "sff-power",
-    title: "Compact Powerhouse",
-    type: "Gaming",
-    short: "Small form factor with surprisingly big performance.",
-    img: "https://images.unsplash.com/photo-1625842203071-9f3f94a515a6?q=80&w=1600&auto=format&fit=crop",
-    highlights: ["SFF build", "Liquid cooling", "High single-core perf"],
-    specs: {"GPU":"NVIDIA RTX 3080","CPU":"Intel i9-12900KS","RAM":"32GB DDR4","Storage":"1TB NVMe","Case":"NCASE M1","PSU":"750W SFX"}
-  },
-  {
-    id: "streamer-pro",
-    title: "Streamer Pro Rig",
-    type: "Creator",
-    short: "Optimized for gaming + streaming simultaneously.",
-    img: "https://images.unsplash.com/photo-1612197576160-7c6e6404c39f?q=80&w=1600&auto=format&fit=crop",
-    highlights: ["Dual PC ready", "Capture card", "Whisper quiet"],
-    specs: {"GPU":"NVIDIA RTX 4070 Ti","CPU":"AMD Ryzen 7 7800X3D","RAM":"32GB DDR5","Storage":"2TB NVMe","Case":"Fractal Design Meshify 2","PSU":"850W Gold"}
-  },
-  {
-    id: "silent-build",
-    title: "Silent Build",
-    type: "Creator",
-    short: "Ultra-quiet design with top-tier cooling.",
-    img: "https://images.unsplash.com/photo-1606813898861-b58f7d3d6d15?q=80&w=1600&auto=format&fit=crop",
-    highlights: ["Silent fans", "Noise dampening", "Low temps"],
-    specs: {"GPU":"NVIDIA RTX 3060 Ti","CPU":"Intel i5-12600K","RAM":"16GB DDR4","Storage":"1TB NVMe","Case":"be quiet! Pure Base 500","PSU":"650W Bronze"}
-  },
-  {
-    id: "rgb-showcase",
-    title: "RGB Showcase Build",
-    type: "Gaming",
-    short: "Designed to show off every RGB component.",
-    img: "https://images.unsplash.com/photo-1598550476439-6225f92f71a1?q=80&w=1600&auto=format&fit=crop",
-    highlights: ["ARGB fans", "Tempered glass", "Custom lighting"],
-    specs: {"GPU":"NVIDIA RTX 4070","CPU":"Intel i7-13700K","RAM":"32GB DDR5","Storage":"1TB NVMe","Case":"Corsair iCUE 5000X","PSU":"850W Gold"}
-  },
-  {
-    id: "ultimate-workstation",
-    title: "Ultimate Workstation",
-    type: "Creator",
-    short: "For heavy workloads: editing, 3D rendering, AI tasks.",
-    img: "https://images.unsplash.com/photo-1593642532973-d31b6557fa68?q=80&w=1600&auto=format&fit=crop",
-    highlights: ["Workstation GPU", "ECC RAM", "Huge storage"],
-    specs: {"GPU":"NVIDIA RTX A6000","CPU":"AMD Threadripper PRO 5975WX","RAM":"128GB ECC DDR4","Storage":"4TB NVMe + 8TB HDD","Case":"Phanteks Enthoo Pro","PSU":"1200W Platinum"}
-  }
+  {id:"rgb-beast", title:"RGB Gaming Beast", type:"Gaming", short:"RTX 4090 + Ryzen 9, custom loop, dazzling RGB.", img:"https://images.unsplash.com/photo-1606813902494-5e6bcb4803b6?auto=format&fit=crop&w=800&q=80", highlights:["Custom loop","64GB DDR5","2TB NVMe"], specs:{"GPU":"RTX 4090","CPU":"Ryzen 9 7950X","RAM":"64GB DDR5","Storage":"2TB NVMe"}},
+  {id:"white-minimal", title:"Minimalist White Build", type:"Creator", short:"Quiet, clean white finish, great thermals.", img:"https://images.unsplash.com/photo-1612197524248-df3ee06e2d79?auto=format&fit=crop&w=800&q=80", highlights:["Silent fans","White theme","Tempered glass"], specs:{"GPU":"RTX 3080","CPU":"i7-12700K","RAM":"32GB DDR4","Storage":"1TB NVMe + 2TB HDD"}},
+  {id:"budget-baller", title:"Budget Baller", type:"Gaming", short:"Affordable build with solid performance.", img:"https://images.unsplash.com/photo-1593642532973-d31b6557fa68?auto=format&fit=crop&w=800&q=80", highlights:["Affordable","Balanced","Reliable"], specs:{"GPU":"RTX 3050","CPU":"Ryzen 5 5500","RAM":"16GB DDR4","Storage":"500GB SSD"}},
+  {id:"compact-power", title:"Compact Powerhouse", type:"Gaming", short:"Small form factor with big performance.", img:"https://images.unsplash.com/photo-1624705002806-4f6c12b6f3ac?auto=format&fit=crop&w=800&q=80", highlights:["SFF","Liquid cooling","High perf"], specs:{"GPU":"RTX 3080","CPU":"i9-12900KS","RAM":"32GB DDR4","Storage":"1TB NVMe"}},
+  {id:"streaming-rig", title:"Streaming Rig", type:"Creator", short:"Optimized for gaming and streaming simultaneously.", img:"https://images.unsplash.com/photo-1612197524913-60f84b0d6e6b?auto=format&fit=crop&w=800&q=80", highlights:["Dual PC ready","Quiet cooling","RGB sync"], specs:{"GPU":"RTX 3070 Ti","CPU":"Ryzen 7 5800X","RAM":"32GB DDR4","Storage":"1TB NVMe"}},
+  {id:"ultra-highend", title:"Ultra High-End Beast", type:"Gaming", short:"Top-of-the-line for max FPS and 4K gaming.", img:"https://images.unsplash.com/photo-1627403731820-7ef8b98e65ce?auto=format&fit=crop&w=800&q=80", highlights:["4K Gaming","Max FPS","Water cooled"], specs:{"GPU":"RTX 4090 Ti","CPU":"i9-13900K","RAM":"64GB DDR5","Storage":"4TB NVMe"}},
+  {id:"creator-pro", title:"Creator Pro Station", type:"Creator", short:"Designed for editing, rendering, and multitasking.", img:"https://images.unsplash.com/photo-1593642634315-48f5414c3ad9?auto=format&fit=crop&w=800&q=80", highlights:["Color accurate","Quiet cooling","Fast storage"], specs:{"GPU":"RTX 3090","CPU":"Ryzen 9 5950X","RAM":"64GB DDR4","Storage":"2TB NVMe + 4TB HDD"}},
+  {id:"mini-itx", title:"Mini-ITX Build", type:"Gaming", short:"Portable yet powerful small rig.", img:"https://images.unsplash.com/photo-1621605815971-7b7f7c4f2a3c?auto=format&fit=crop&w=800&q=80", highlights:["Tiny size","Portable","Surprisingly powerful"], specs:{"GPU":"RTX 3060 Ti","CPU":"i5-12600K","RAM":"16GB DDR4","Storage":"1TB NVMe"}}
 ];
 
 const grid = document.getElementById('grid');
@@ -222,6 +164,8 @@ const modalImg = document.getElementById('modal-img');
 const modalDesc = document.getElementById('modal-desc');
 const specList = document.getElementById('spec-list');
 const modalHighlights = document.getElementById('modal-highlights');
+
+function escapeHtml(s){return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');}
 
 function makeCard(build){
   const a = document.createElement('article');
@@ -254,48 +198,44 @@ function openBuild(id){
   if(!build) return;
   modalTitle.textContent = build.title;
   modalImg.src = build.img;
-  modalImg.alt = build.title;
   modalDesc.textContent = build.short;
   specList.innerHTML = '';
   modalHighlights.innerHTML = '';
   Object.entries(build.specs).forEach(([k,v])=>{
-    const li = document.createElement('li');
-    li.textContent = `${k}: ${v}`;
+    const li=document.createElement('li');
+    li.textContent=`${k}: ${v}`;
     specList.appendChild(li);
   });
   (build.highlights||[]).forEach(h=>{
-    const d = document.createElement('div');
-    d.className = 'chip';
-    d.style.background = 'transparent';
-    d.style.color = 'var(--muted)';
-    d.style.border = '1px solid rgba(255,255,255,0.03)';
-    d.textContent = h;
+    const d=document.createElement('div');
+    d.className='chip';
+    d.textContent=h;
     modalHighlights.appendChild(d);
   });
-  backdrop.style.display = 'flex';
+  backdrop.style.display='flex';
   backdrop.setAttribute('aria-hidden','false');
 }
 
-document.getElementById('close-modal').addEventListener('click', closeModal);
-backdrop.addEventListener('click', (e)=>{ if(e.target===backdrop) closeModal(); });
 function closeModal(){
-  backdrop.style.display = 'none';
+  backdrop.style.display='none';
   backdrop.setAttribute('aria-hidden','true');
 }
+document.getElementById('close-modal').addEventListener('click',closeModal);
+backdrop.addEventListener('click',e=>{if(e.target===backdrop)closeModal();});
 
-q.addEventListener('input', ()=> {
-  const val = q.value.trim().toLowerCase();
+q.addEventListener('input',()=>{
+  const val=q.value.trim().toLowerCase();
   if(!val) return renderGrid(builds);
-  const out = builds.filter(b=>{
-    return (b.title + ' ' + b.short + ' ' + Object.values(b.specs).join(' ')).toLowerCase().includes(val);
-  });
+  const out=builds.filter(b=>(b.title+' '+b.short+' '+Object.values(b.specs).join(' ')).toLowerCase().includes(val));
   renderGrid(out);
 });
 
-document.getElementById('filter-all').addEventListener('click', ()=>renderGrid(builds));
-document.getElementById('filter-gaming').addEventListener('click', ()=>renderGrid(builds.filter(b=>b.type==='Gaming')));
-document.getElementById('filter-creator').addEventListener('click', ()=>renderGrid(builds.filter(b=>b.type==='Creator')));
-
-function escapeHtml(s){ return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;'); }
+document.getElementById('filter-all').addEventListener('click',()=>renderGrid(builds));
+document.getElementById('filter-gaming').addEventListener('click',()=>renderGrid(builds.filter(b=>b.type==='Gaming')));
+document.getElementById('filter-creator').addEventListener('click',()=>renderGrid(builds.filter(b=>b.type==='Creator')));
 
 renderGrid(builds);
+</script>
+
+</body>
+</html>
